@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.icu.text.SimpleDateFormat;
 import android.icu.util.Calendar;
 import android.net.Uri;
@@ -28,6 +29,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.cristinica.foodhelper.apiConnector.AddFoodApi;
+import com.example.cristinica.foodhelper.models.LoginModel;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -210,6 +213,10 @@ public class AddFood extends Fragment {
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final SharedPreferences sharedPreferences = getContext().getSharedPreferences("user", Context.MODE_PRIVATE);
+                final LoginModel loginModel;
+                Gson g = new Gson();
+                loginModel = g.fromJson(sharedPreferences.getString("user", ""), LoginModel.class);
 
                 final String cantitateS = cantitate.getText().toString();
                 final  int id = list2.get(dropdown2.getSelectedItemPosition()).getImageId();
@@ -221,7 +228,7 @@ public class AddFood extends Fragment {
 
                     @Override
                     protected Void doInBackground(Void... params) {
-                        s = AddFoodApi.add("victor.ciresica@lenovo.com",numeS,cantitateS,umS,expirationDateS);
+                        s = AddFoodApi.add(loginModel.email,numeS,cantitateS,umS,expirationDateS);
                         Log.v("am primit la add", s);
 
 
@@ -231,7 +238,7 @@ public class AddFood extends Fragment {
                     @Override
                     protected void onPostExecute(Void aVoid) {
                         super.onPostExecute(aVoid);
-                        if (s.equals("ok")) {
+                        if (s.equals("ok\n")) {
 
 
                             AlertDialog alertDialog = new AlertDialog.Builder(getContext()).create();
@@ -244,19 +251,8 @@ public class AddFood extends Fragment {
                                         }
                                     });
                             alertDialog.show();
-//                            final SweetAlertDialog alertDialog = new SweetAlertDialog(getContext(), SweetAlertDialog.SUCCESS_TYPE);
-//
-//                            alertDialog.setTitle("Food added successfully!");
-//                            alertDialog.setContentText("Someone in need will contact you soon");
-//                            alertDialog.setConfirmText("Ok");
-//                            alertDialog.show();
-//                            alertDialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-//                                @Override
-//                                public void onClick(SweetAlertDialog sDialog) {
-//                                    alertDialog.dismiss();
-//                                }
-//                            });
-//
+
+
                         } else {
                             AlertDialog alertDialog = new AlertDialog.Builder(getContext()).create();
                             alertDialog.setTitle("Alert");

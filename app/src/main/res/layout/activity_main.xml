@@ -30,7 +30,7 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="15dp"
-            android:text="Do you wanna help?"
+            android:text="Do you want to help?"
             android:textColor="@android:color/background_light"
             android:textSize="18sp" />
 

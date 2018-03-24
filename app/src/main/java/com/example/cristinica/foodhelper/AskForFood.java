@@ -4,18 +4,33 @@ package com.example.cristinica.foodhelper;
  * Created by alex on 3/24/2018.
  */
 
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import com.example.cristinica.foodhelper.apiConnector.AddFoodApi;
+import com.example.cristinica.foodhelper.apiConnector.SearchApi;
+import com.example.cristinica.foodhelper.models.Companys;
+import com.example.cristinica.foodhelper.models.LoginModel;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 
@@ -30,6 +45,11 @@ public class AskForFood extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     View view;
     RadioGroup radioGroup;
+    String s;
+    Button search;
+    ListView listViewAsk;
+    MyListAdapterAsk adapter;
+    static public ArrayList<Companys> companys = new ArrayList<Companys>();
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -75,8 +95,9 @@ public class AskForFood extends Fragment {
         view = inflater.inflate(R.layout.fragment_ask_for_food, container, false);
         final TextView textViewFood = view.findViewById(R.id.textView6);
         final EditText cantitate =  view.findViewById(R.id.cantitate);
+        listViewAsk = view.findViewById(R.id.listAsk);
         final ArrayList<ItemData> list=new ArrayList<>();
-
+        search = view.findViewById(R.id.search);
         list.add(new ItemData("Main Course",R.drawable.maincourse));
         list.add(new ItemData("Soup",R.drawable.soup));
         list.add(new ItemData("Sandwich",R.drawable.sandwich));
@@ -117,6 +138,61 @@ public class AskForFood extends Fragment {
         };
         rb1.setOnClickListener(button1Listener);
         rb2.setOnClickListener(button2Listener);
+
+
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                final String cantitateS = cantitate.getText().toString();
+
+                final String numeS=list.get(sp.getSelectedItemPosition()).getText();
+                @SuppressLint("StaticFieldLeak") AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
+
+
+                    @Override
+                    protected Void doInBackground(Void... params) {
+                        s = SearchApi.search(numeS,cantitateS);
+                        Log.v("am primit la search", s);
+                        Gson g = new Gson();
+                        companys = g.fromJson(s,  new TypeToken<ArrayList<Companys>>(){}.getType());
+                        return null;
+
+                    }
+                    @Override
+                    protected void onPostExecute(Void aVoid) {
+                        super.onPostExecute(aVoid);
+
+                        adapter = new MyListAdapterAsk(getContext(), companys);
+                        listViewAsk.setAdapter(adapter);
+                        if (s.equals("null\n")) {
+                            AlertDialog alertDialog = new AlertDialog.Builder(getContext()).create();
+                            alertDialog.setTitle("0 results");
+
+                            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            dialog.dismiss();
+                                        }
+                                    });
+                            alertDialog.show();
+
+
+                        }
+                    }
+                };
+
+                task.execute();
+            }
+        });
+
+
+
+
+
+
+
+
 
         return view;
     }
