@@ -1,8 +1,10 @@
 package com.example.cristinica.foodhelper;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.icu.text.SimpleDateFormat;
 import android.icu.util.Calendar;
 import android.net.Uri;
@@ -229,7 +231,19 @@ public class AddFood extends Fragment {
                     @Override
                     protected void onPostExecute(Void aVoid) {
                         super.onPostExecute(aVoid);
-//                        if (s.equals("ok")) {
+                        if (s.equals("ok")) {
+
+
+                            AlertDialog alertDialog = new AlertDialog.Builder(getContext()).create();
+                            alertDialog.setTitle("Alert");
+                            alertDialog.setMessage("Add was added!");
+                            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            dialog.dismiss();
+                                        }
+                                    });
+                            alertDialog.show();
 //                            final SweetAlertDialog alertDialog = new SweetAlertDialog(getContext(), SweetAlertDialog.SUCCESS_TYPE);
 //
 //                            alertDialog.setTitle("Food added successfully!");
@@ -243,7 +257,17 @@ public class AddFood extends Fragment {
 //                                }
 //                            });
 //
-//                        } else {
+                        } else {
+                            AlertDialog alertDialog = new AlertDialog.Builder(getContext()).create();
+                            alertDialog.setTitle("Alert");
+                            alertDialog.setMessage("error adding food!");
+                            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            dialog.dismiss();
+                                        }
+                                    });
+                            alertDialog.show();
 //                            final SweetAlertDialog alertDialog = new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE);
 //                            alertDialog.setTitle("Error!");
 //                            alertDialog.setContentText("Something went wrong :( ");
@@ -255,7 +279,7 @@ public class AddFood extends Fragment {
 //                                    alertDialog.dismiss();
 //                                }
 //                            });
-//                        }
+                        }
                     }
                 };
 
