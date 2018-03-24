@@ -16,7 +16,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        getSupportActionBar().setTitle("");
+        getSupportActionBar().hide();
         RelativeLayout help = findViewById(R.id.share_food);
         RelativeLayout need = findViewById(R.id.need_food);
         SharedPreferences sharedPreferences = MainActivity.this.getSharedPreferences("type", Context

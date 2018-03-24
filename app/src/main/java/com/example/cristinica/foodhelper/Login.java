@@ -30,7 +30,8 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
+        getSupportActionBar().setTitle("");
+        getSupportActionBar().hide();
         goToRegister = findViewById(R.id.goToRegister);
 
         goToRegister.setOnClickListener(new View.OnClickListener() {

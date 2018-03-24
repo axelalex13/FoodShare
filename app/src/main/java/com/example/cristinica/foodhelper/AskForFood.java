@@ -11,6 +11,13 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Spinner;
+import android.widget.TextView;
+
+import java.util.ArrayList;
 
 /**
  * Created by cristi.nica on 3/24/2018.
@@ -21,6 +28,8 @@ public class AskForFood extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    View view;
+    RadioGroup radioGroup;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -63,7 +72,53 @@ public class AskForFood extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_ask_for_food, container, false);
+        view = inflater.inflate(R.layout.fragment_ask_for_food, container, false);
+        final TextView textViewFood = view.findViewById(R.id.textView6);
+        final EditText cantitate =  view.findViewById(R.id.cantitate);
+        final ArrayList<ItemData> list=new ArrayList<>();
+
+        list.add(new ItemData("Main Course",R.drawable.maincourse));
+        list.add(new ItemData("Soup",R.drawable.soup));
+        list.add(new ItemData("Sandwich",R.drawable.sandwich));
+        list.add(new ItemData("Desert",R.drawable.cupcake));
+        list.add(new ItemData("Juice",R.drawable.juice));
+        final Spinner sp=(Spinner) view.findViewById(R.id.spinner_ask_food);
+        final SpinnerAdapter adapter2=new SpinnerAdapter(getActivity(), R.layout.spinner_layout,R.id.txt,list);
+        sp.setAdapter(adapter2);
+
+        final  ArrayList<ItemData> list3=new ArrayList<>();
+
+
+        list3.add(new ItemData("Oil",R.drawable.oil));
+        list3.add(new ItemData("Sugar",R.drawable.sugar));
+        list3.add(new ItemData("Flour",R.drawable.flour));
+        list3.add(new ItemData("Rice",R.drawable.rice));
+        final SpinnerAdapter adapter4=new SpinnerAdapter(getActivity(), R.layout.spinner_layout,R.id.txt,list3);
+
+
+        radioGroup=(RadioGroup)view.findViewById(R.id.radioGroup);
+        final RadioButton rb1 = (RadioButton)  view.findViewById(R.id.radio_food);
+        final RadioButton rb2 = (RadioButton)  view.findViewById(R.id.radio_ingredients);
+        radioGroup.check(rb1.getId());
+        View.OnClickListener button1Listener = new View.OnClickListener() {
+            public void onClick(View v) {
+                sp.setAdapter(adapter2);
+                textViewFood.setText("Food type");
+
+
+            }
+        };
+
+        View.OnClickListener button2Listener = new View.OnClickListener() {
+            public void onClick(View v) {
+                sp.setAdapter(adapter4);
+                textViewFood.setText("Select ingredient");
+            }
+        };
+        rb1.setOnClickListener(button1Listener);
+        rb2.setOnClickListener(button2Listener);
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

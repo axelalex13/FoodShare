@@ -1,13 +1,131 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-tools:context="com.example.cristinica.foodhelper.FoodFragment">
-
-<!-- TODO: Update blank fragment layout -->
-<TextView
+<RelativeLayout android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:text="@string/hello_blank_fragment" />
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="#F5F5F5">
 
-</FrameLayout>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginEnd="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="20dp"
+        android:text="You can search for cooked food or ingredients"
+        android:textAlignment="center"
+
+        android:textColor="#81878b"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/radioGroup"
+        android:layout_marginTop="70dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/radio_food"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:onClick="onRadioButtonClicked"
+            android:text="Cooked food" />
+
+        <RadioButton
+            android:id="@+id/radio_ingredients"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:onClick="onRadioButtonClicked"
+            android:text="Ingredients" />
+    </RadioGroup>
+
+    <RelativeLayout
+        android:id="@+id/layoutFood"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/radioGroup">
+
+        <Spinner
+            android:id="@+id/spinner_ask_food"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/textView6"
+            android:layout_alignStart="@+id/textView6"
+            android:layout_below="@+id/textView6"
+            android:layout_marginTop="11dp" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="40dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="17dp"
+            android:text="Food type"
+            android:textColor="#81878b" />
+
+
+
+
+
+
+    </RelativeLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/cantitateWrapper"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:textColor="@color/colorPrimary"
+        android:layout_marginTop="210dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginStart="40dp">
+
+        <EditText
+            android:id="@+id/cantitate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="112dp"
+            android:ems="10"
+
+            android:hint="Quantity"
+            android:inputType="number"
+            android:textSize="18sp" />
+    </android.support.design.widget.TextInputLayout>
+
+
+    <Button
+        android:id="@+id/addFood"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/cantitateWrapper"
+        android:layout_alignStart="@+id/cantitateWrapper"
+        android:layout_below="@+id/cantitateWrapper"
+        android:layout_marginLeft="34dp"
+        android:layout_marginStart="34dp"
+        android:layout_marginTop="35dp"
+        android:background="@drawable/round"
+        android:text="Search"
+        android:textSize="20sp" />
+
+
+
+</RelativeLayout>
+
+
+
+
