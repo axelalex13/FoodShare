@@ -206,9 +206,19 @@
         android:id="@+id/logout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/reprezentant"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp"
+        android:layout_marginBottom="36dp"
         android:text="Logout" />
+
+    <Button
+        android:id="@+id/save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/logout"
+        android:layout_alignRight="@+id/logout"
+        android:layout_below="@+id/reprezentant"
+        android:layout_marginTop="11dp"
+        android:text="Save" />
 
 </RelativeLayout>

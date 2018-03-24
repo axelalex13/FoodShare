@@ -69,10 +69,10 @@ public class Login extends AppCompatActivity {
             public void onClick(View view) {
                 @SuppressLint("StaticFieldLeak") AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
                     LoginModel loginModel = new LoginModel();
-
+                    String s;
                     @Override
                     protected Void doInBackground(Void... params) {
-                        String s = LoginApi.login(companyMail.getText().toString(), pass.getText().toString());
+                        s = LoginApi.login(companyMail.getText().toString(), pass.getText().toString());
                         Log.v("primit", s);
                         Gson g = new Gson();
                         loginModel = g.fromJson(s, LoginModel.class);
@@ -82,6 +82,11 @@ public class Login extends AppCompatActivity {
                     @SuppressLint("ShowToast")
                     protected void onPostExecute(Void param) {
                         if (loginModel.status.equals("ok")) {
+                            final SharedPreferences sharedPreferences3 = Login.this.getSharedPreferences("user", Context.MODE_PRIVATE);
+                            SharedPreferences.Editor editorUser = sharedPreferences3.edit();
+                            editorUser.putString("user", s);
+                            editorUser.apply();
+
                             if (type == 0) {
                                 SharedPreferences sharedPreferences2 = Login.this.getSharedPreferences("logged", Context
                                         .MODE_PRIVATE);
@@ -115,5 +120,6 @@ public class Login extends AppCompatActivity {
         });
 
     }
+
 
 }

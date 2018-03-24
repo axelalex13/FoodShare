@@ -169,8 +169,9 @@ public class AddFood extends Fragment {
 
         final  ArrayList<ItemData> list3=new ArrayList<>();
 
-        list3.add(new ItemData("Sugar",R.drawable.sugar));
+
         list3.add(new ItemData("Oil",R.drawable.oil));
+        list3.add(new ItemData("Sugar",R.drawable.sugar));
         list3.add(new ItemData("Flour",R.drawable.flour));
         list3.add(new ItemData("Rice",R.drawable.rice));
         final SpinnerAdapter adapter4=new SpinnerAdapter(getActivity(), R.layout.spinner_layout,R.id.txt,list3);
@@ -183,7 +184,7 @@ public class AddFood extends Fragment {
         radioGroup=(RadioGroup)view.findViewById(R.id.radioGroup);
         final RadioButton rb1 = (RadioButton)  view.findViewById(R.id.radio_food);
         final RadioButton rb2 = (RadioButton)  view.findViewById(R.id.radio_ingredients);
-
+        radioGroup.check(rb1.getId());
         View.OnClickListener button1Listener = new View.OnClickListener() {
             public void onClick(View v) {
             sp.setAdapter(adapter2);

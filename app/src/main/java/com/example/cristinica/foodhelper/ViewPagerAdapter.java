@@ -17,7 +17,7 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     private int[] imageResId = {
 
     };
-    private static final String[] CONTENT = new String[] { "ADD", "VIEW"};
+    private static final String[] CONTENT = new String[] { "ADD", "YOUR FOOD"};
     CharSequence Titles[]; // This will Store the Titles of the Tabs which are Going to be passed when ViewPagerAdapter is created
     int NumbOfTabs; // Store the number of tabs, this will also be passed when the ViewPagerAdapter is created
 

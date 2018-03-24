@@ -1,12 +1,27 @@
 package com.example.cristinica.foodhelper;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+
+import com.example.cristinica.foodhelper.apiConnector.MyFoodApi;
+import com.example.cristinica.foodhelper.models.Food;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -22,6 +37,11 @@ public class FoodFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private ArrayList<Food> foods;
+    private ListAdapter adapter ; // adapter reference
+    View view;
+    ListView listView;
+
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -64,7 +84,58 @@ public class FoodFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_food, container, false);
+        view = inflater.inflate(R.layout.fragment_food, container, false);
+        listView = view.findViewById(R.id.list);
+
+
+        @SuppressLint("StaticFieldLeak") AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
+
+
+            @Override
+
+            protected Void doInBackground(Void... params) {
+                String s = MyFoodApi.getFood("carrefour@carrefour.com");
+
+                Log.v("am primit la get food", s);
+                Gson g = new Gson();
+                foods = g.fromJson(s,  new TypeToken<ArrayList<Food>>(){}.getType());
+
+
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void aVoid) {
+
+                super.onPostExecute(aVoid);
+
+                Log.v("lista",foods.get(0).nume);
+                adapter = new MyListAdapter(getContext(), foods);
+                listView.setAdapter(adapter);
+
+
+                // removedItems = new ArrayList<Integer>();
+
+
+
+
+
+            }
+        };
+
+        task.execute();
+
+
+
+
+
+        return view;
+
+
+
+
+
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event
