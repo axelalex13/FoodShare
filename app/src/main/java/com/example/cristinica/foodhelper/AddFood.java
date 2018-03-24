@@ -1,23 +1,29 @@
 package com.example.cristinica.foodhelper;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.icu.text.SimpleDateFormat;
 import android.icu.util.Calendar;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import java.util.ArrayList;
+import com.example.cristinica.foodhelper.apiConnector.AddFoodApi;
+
 import java.util.Locale;
 
 
@@ -80,8 +86,9 @@ public class AddFood extends Fragment {
         view = inflater.inflate(R.layout.fragment_add_food, container, false);
         final TextView expirationDate = (TextView) view.findViewById(R.id.expirationDate);
         final Spinner dropdown2 = (Spinner) view.findViewById(R.id.unit);
-
-
+        final Button add =  view.findViewById(R.id.addFood);
+        final EditText nume =  view.findViewById(R.id.foodName);
+        final EditText cantitate =  view.findViewById(R.id.cantitate);
         final Calendar myCalendar = Calendar.getInstance();
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
 
@@ -120,6 +127,41 @@ public class AddFood extends Fragment {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
                 R.layout.spinner_item, unit);
         dropdown2.setAdapter(adapter);
+
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final String numeS = nume.getText().toString();
+                final String cantitateS = cantitate.getText().toString();
+                final String um = dropdown2.getSelectedItem().toString();
+//                final String email = sharedPreferencesUser.getString("id_organizator", "");
+                final String expirationDateS = expirationDate.getText().toString();
+
+                @SuppressLint("StaticFieldLeak") AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
+
+
+                    @Override
+                    protected Void doInBackground(Void... params) {
+                        String s = AddFoodApi.add("victor.ciresica@lenovo.com",numeS,cantitateS,um,expirationDateS);
+                        Log.v("am primit la add", s);
+
+                        return null;
+
+                    }
+
+                    @Override
+                    protected void onPostExecute(Void aVoid) {
+                        super.onPostExecute(aVoid);
+                    }
+                };
+
+                task.execute();
+            }
+        });
+
+
+
+
 
 
 

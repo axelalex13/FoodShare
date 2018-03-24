@@ -15,10 +15,9 @@ import android.text.style.ImageSpan;
 
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     private int[] imageResId = {
-            R.drawable.plus,
-            R.drawable.list
-    };
 
+    };
+    private static final String[] CONTENT = new String[] { "ADD", "VIEW"};
     CharSequence Titles[]; // This will Store the Titles of the Tabs which are Going to be passed when ViewPagerAdapter is created
     int NumbOfTabs; // Store the number of tabs, this will also be passed when the ViewPagerAdapter is created
 
@@ -57,12 +56,8 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     @Override
     public CharSequence getPageTitle(int position) {
 
-        Drawable image = MyApplication.getAppContext().getResources().getDrawable(imageResId[position]);
-        image.setBounds(0, 0, image.getIntrinsicWidth(), image.getIntrinsicHeight());
-        SpannableString sb = new SpannableString(" ");
-        ImageSpan imageSpan = new ImageSpan(image, ImageSpan.ALIGN_BOTTOM);
-        sb.setSpan(imageSpan, 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        return sb;
+
+        return CONTENT[position % CONTENT.length].toUpperCase();
     }
 
     // This method return the Number of tabs for the tabs Strip
