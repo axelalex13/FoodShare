@@ -15,7 +15,7 @@ import android.text.style.ImageSpan;
 
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     private int[] imageResId = {
-            R.drawable.add,
+            R.drawable.plus,
             R.drawable.list
     };
 
