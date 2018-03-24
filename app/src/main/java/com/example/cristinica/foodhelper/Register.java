@@ -65,9 +65,12 @@ public class Register extends AppCompatActivity {
                         if (registerModel.status.equals("ok")) {
                             if (type == 0) {
                                 Intent intent = new Intent(Register.this, GiverActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 startActivity(intent);
                             } else if (type == 1) {
-
+                                Intent intent = new Intent(Register.this, ReceiverActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                startActivity(intent);
                             }
                         } else {
 

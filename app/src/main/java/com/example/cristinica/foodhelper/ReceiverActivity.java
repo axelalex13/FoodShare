@@ -1,27 +1,24 @@
 package com.example.cristinica.foodhelper;
 
-import android.content.Intent;
 import android.net.Uri;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 
-public class GiverActivity extends AppCompatActivity  implements FoodFragment.OnFragmentInteractionListener,AddFood.OnFragmentInteractionListener{
+public class ReceiverActivity extends AppCompatActivity implements AskForFood.OnFragmentInteractionListener, SearchFood.OnFragmentInteractionListener {
     ViewPager view_pager;
-    ViewPagerAdapter adapter;
+    ReceivrPageAdapter adapter;
     public static SlidingTabLayout tabs;
-    CharSequence Titles[] = {"Evenimente","Adauga"};
+    CharSequence Titles[] = {"Evenimente", "Adauga"};
     int Numboftabs = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_giver);
+        setContentView(R.layout.activity_reciver);
 
         /// Creating The ViewPagerAdapter and Passing Fragment Manager, Titles fot the Tabs and Number Of Tabs.
-        adapter = new ViewPagerAdapter(getSupportFragmentManager(), Titles, Numboftabs);
+        adapter = new ReceivrPageAdapter(getSupportFragmentManager(), Titles, Numboftabs);
 
         // Assigning ViewPager View and setting the adapter
         view_pager = (ViewPager) findViewById(R.id.view_pagerHome);
@@ -49,33 +46,9 @@ public class GiverActivity extends AppCompatActivity  implements FoodFragment.On
     }
 
 
-
-
     @Override
     public void onFragmentInteraction(Uri uri) {
 
     }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-
-        int id = item.getItemId();
-        if (id == R.id.menu_lang) {
-
-            Intent i = new Intent(GiverActivity.this, Login.class);
-            startActivity(i);
-
-        }
-        return super.onOptionsItemSelected(item);
-    }
 }
+

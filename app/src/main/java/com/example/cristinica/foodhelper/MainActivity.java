@@ -23,13 +23,26 @@ public class MainActivity extends AppCompatActivity {
                 .MODE_PRIVATE);
         final SharedPreferences.Editor editor = sharedPreferences.edit();
 
+        SharedPreferences sharedPreferences2 = MainActivity.this.getSharedPreferences("logged", Context
+                .MODE_PRIVATE);
+        int logged = sharedPreferences2.getInt("logged", -1);
+        int type = sharedPreferences.getInt("type", -1);
+        if (logged == 1 && type == 0) {
+            Intent intent = new Intent(MainActivity.this, GiverActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+        } else if (logged == 1 && type == 1) {
+            Intent intent = new Intent(MainActivity.this, ReceiverActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+        }
         //companie
         help.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 editor.putInt("type", 0);
                 editor.apply();
-                Intent intent = new Intent(MainActivity.this,Login.class);
+                Intent intent = new Intent(MainActivity.this, Login.class);
                 startActivity(intent);
             }
         });
@@ -39,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 editor.putInt("type", 1);
                 editor.apply();
-                Intent intent = new Intent(MainActivity.this,Login.class);
+                Intent intent = new Intent(MainActivity.this, Login.class);
                 startActivity(intent);
             }
         });

@@ -46,7 +46,7 @@ public class Login extends AppCompatActivity {
         final EditText pass = findViewById(R.id.password_login);
 
         Button register = findViewById(R.id.register2);
-        SharedPreferences sharedPreferences = Login.this.getSharedPreferences("type", Context
+        final SharedPreferences sharedPreferences = Login.this.getSharedPreferences("type", Context
                 .MODE_PRIVATE);
         //final SharedPreferences.Editor editor = sharedPreferences.edit();
         final int type = sharedPreferences.getInt("type", -1);
@@ -83,7 +83,25 @@ public class Login extends AppCompatActivity {
                     protected void onPostExecute(Void param) {
                         if (loginModel.status.equals("ok")) {
                             if (type == 0) {
+                                SharedPreferences sharedPreferences2 = Login.this.getSharedPreferences("logged", Context
+                                        .MODE_PRIVATE);
+                                SharedPreferences.Editor editor2 = sharedPreferences2.edit();
+                                editor2.putInt("logged", 1);
+                                editor2.apply();
+
                                 Intent intent = new Intent(Login.this, GiverActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                startActivity(intent);
+                            }
+                            if (type == 1) {
+                                SharedPreferences sharedPreferences2 = Login.this.getSharedPreferences("logged", Context
+                                        .MODE_PRIVATE);
+                                SharedPreferences.Editor editor2 = sharedPreferences2.edit();
+                                editor2.putInt("logged", 1);
+                                editor2.apply();
+
+                                Intent intent = new Intent(Login.this, ReceiverActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 startActivity(intent);
                             }
                         } else {

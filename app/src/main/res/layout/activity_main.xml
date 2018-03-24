@@ -9,7 +9,7 @@
     <RelativeLayout
         android:id="@+id/share_food"
         android:layout_width="300dp"
-        android:layout_height="100dp"
+        android:layout_height="130dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="100dp"
         android:background="@drawable/round"
@@ -38,14 +38,22 @@
             android:text="For Markets, Restaurants.."
             android:textColor="@android:color/background_light"
             android:textSize="12sp" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text1_share"
+            android:layout_centerHorizontal="true"
+            app:srcCompat="@drawable/share_food" />
     </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/need_food"
         android:layout_width="300dp"
-        android:layout_height="100dp"
+        android:layout_height="130dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="230dp"
+        android:layout_marginTop="250dp"
         android:background="@drawable/round2"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="42dp"
@@ -72,6 +80,14 @@
             android:text="For refuge, nursing home.."
             android:textColor="@android:color/background_light"
             android:textSize="12sp" />
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text1_need"
+            android:layout_centerHorizontal="true"
+            app:srcCompat="@drawable/receive_food" />
     </RelativeLayout>
 
 </RelativeLayout>
