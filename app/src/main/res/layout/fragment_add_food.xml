@@ -1,41 +1,44 @@
 <RelativeLayout android:layout_height="match_parent"
     android:layout_width="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android" >
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="#F5F5F5">
 
 
     <TextView
-        android:textColor="@color/colorPrimary"
+        android:textColor="#81878b"
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="36dp"
-        android:textSize="20sp"
-        android:text="You can add food here" />
+        android:layout_marginTop="20dp"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:text="You can help other with your food" />
 
-
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/foodNameWrapper"
+    <Spinner
+        android:id="@+id/spinner"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:layout_marginTop="80dp"
-        android:textColor="@color/colorPrimary"
-        android:layout_marginLeft="30dp"
-        android:layout_marginStart="30dp">
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView"
+        android:layout_marginLeft="40dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="54dp"
+        />
 
-        <EditText
+    <TextView
+        android:textColor="#81878b"
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/spinner"
+        android:layout_alignStart="@+id/spinner"
+        android:layout_below="@+id/textView"
+        android:layout_marginTop="16dp"
+        android:text="Food type" />
 
-            android:id="@+id/foodName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="112dp"
-            android:ems="10"
-            android:hint="Type of food"
-            android:inputType="text"
-            android:textSize="20sp" />
-    </android.support.design.widget.TextInputLayout>
     <android.support.design.widget.TextInputLayout
         android:id="@+id/cantitateWrapper"
         android:layout_width="200dp"
@@ -43,9 +46,9 @@
         android:ems="10"
         android:textColor="@color/colorPrimary"
         android:layout_marginTop="30dp"
-        android:layout_below="@+id/foodNameWrapper"
-        android:layout_marginLeft="30dp"
-        android:layout_marginStart="30dp">
+        android:layout_below="@+id/spinner"
+        android:layout_marginLeft="40dp"
+        android:layout_marginStart="40dp">
 
         <EditText
             android:id="@+id/cantitate"
@@ -56,23 +59,19 @@
 
             android:hint="Quantity"
             android:inputType="number"
-            android:textSize="20sp" />
+            android:textSize="18sp" />
     </android.support.design.widget.TextInputLayout>
 
-
     <Spinner
-
-        android:id="@+id/unit"
-        android:layout_width="1200dp"
+        android:id="@+id/spinner2"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
+
         android:layout_alignBottom="@+id/cantitateWrapper"
-        android:layout_marginBottom="13dp"
-        android:layout_marginLeft="22dp"
-        android:layout_marginStart="22dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginLeft="21dp"
+        android:layout_marginStart="21dp"
         android:layout_toEndOf="@+id/cantitateWrapper"
-        android:layout_toRightOf="@+id/cantitateWrapper"
-        android:layout_marginEnd="10dp" />
+        android:layout_toRightOf="@+id/cantitateWrapper" />
 
     <android.support.design.widget.TextInputLayout
         android:textColor="@color/colorPrimary"
@@ -80,9 +79,9 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/cantitateWrapper"
-        android:layout_marginTop="70dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginStart="30dp">
+        android:layout_marginTop="60dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginStart="40dp">
 
         <EditText
 
@@ -90,26 +89,26 @@
             android:layout_width="182dp"
             android:layout_height="wrap_content"
             android:focusable="false"
-
             android:hint="Expiration date "
-            android:textSize="20sp" />
+            android:textSize="18sp" />
     </android.support.design.widget.TextInputLayout>
 
     <TextView
-        android:textColor="@color/colorPrimary"
-        android:id="@+id/textView6"
+        android:textStyle="bold"
+        android:textColor="#81878b"
+        android:id="@+id/textView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/startingDateWrapper"
         android:layout_alignStart="@+id/startingDateWrapper"
         android:layout_below="@+id/cantitateWrapper"
         android:layout_marginTop="30dp"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:text="Please provide an expiration date" />
 
     <Button
         android:id="@+id/addFood"
-        android:layout_width="120dp"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/startingDateWrapper"
         android:layout_centerHorizontal="true"
@@ -117,6 +116,7 @@
         android:textSize="20sp"
         android:background="@drawable/round"
         android:text="ADD" />
+
 
 
 </RelativeLayout>

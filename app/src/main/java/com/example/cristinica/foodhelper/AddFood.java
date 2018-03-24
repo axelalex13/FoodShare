@@ -24,7 +24,12 @@ import android.widget.TextView;
 
 import com.example.cristinica.foodhelper.apiConnector.AddFoodApi;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Locale;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
 
 
 /**
@@ -41,6 +46,7 @@ public class AddFood extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     View view;
+    String s;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -85,9 +91,9 @@ public class AddFood extends Fragment {
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_add_food, container, false);
         final TextView expirationDate = (TextView) view.findViewById(R.id.expirationDate);
-        final Spinner dropdown2 = (Spinner) view.findViewById(R.id.unit);
+        final Spinner dropdown2 = (Spinner) view.findViewById(R.id.spinner2);
         final Button add =  view.findViewById(R.id.addFood);
-        final EditText nume =  view.findViewById(R.id.foodName);
+
         final EditText cantitate =  view.findViewById(R.id.cantitate);
         final Calendar myCalendar = Calendar.getInstance();
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
@@ -124,34 +130,87 @@ public class AddFood extends Fragment {
             }
         });
         String[] unit = {"Kg","Liters","Porsions"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
+        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
                 R.layout.spinner_item, unit);
         dropdown2.setAdapter(adapter);
+
+       final  ArrayList<ItemData> list=new ArrayList<>();
+
+        list.add(new ItemData("Main Course",R.drawable.maincourse));
+        list.add(new ItemData("Soup",R.drawable.soup));
+        list.add(new ItemData("Sandwich",R.drawable.sandwich));
+        list.add(new ItemData("Desert",R.drawable.cupcake));
+        list.add(new ItemData("Juice",R.drawable.juice));
+        final Spinner sp=(Spinner) view.findViewById(R.id.spinner);
+        SpinnerAdapter adapter2=new SpinnerAdapter(getActivity(), R.layout.spinner_layout,R.id.txt,list);
+        sp.setAdapter(adapter2);
+
+        final ArrayList<ItemData> list2=new ArrayList<>();
+
+        list2.add(new ItemData("",R.drawable.kg));
+        list2.add(new ItemData("",R.drawable.plate));
+        list2.add(new ItemData("",R.drawable.liter));
+
+        SpinnerAdapter adapter3=new SpinnerAdapter(getActivity(), R.layout.spinner_layout,R.id.txt,list2);
+        dropdown2.setAdapter(adapter3);
+        @SuppressLint("UseSparseArrays") final HashMap<Integer,String> ids = new HashMap<>();
+        ids.put(list2.get(0).getImageId(),"kg");
+        ids.put(list2.get(1).getImageId(),"liters");
+        ids.put(list2.get(2).getImageId(),"plates");
+
+
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final String numeS = nume.getText().toString();
-                final String cantitateS = cantitate.getText().toString();
-                final String um = dropdown2.getSelectedItem().toString();
-//                final String email = sharedPreferencesUser.getString("id_organizator", "");
-                final String expirationDateS = expirationDate.getText().toString();
 
+                final String cantitateS = cantitate.getText().toString();
+                final  int id = list2.get(dropdown2.getSelectedItemPosition()).getImageId();
+                final String umS = ids.get(id);
+                final String expirationDateS = expirationDate.getText().toString();
+                final String numeS=list.get(sp.getSelectedItemPosition()).getText();
                 @SuppressLint("StaticFieldLeak") AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
 
 
                     @Override
                     protected Void doInBackground(Void... params) {
-                        String s = AddFoodApi.add("victor.ciresica@lenovo.com",numeS,cantitateS,um,expirationDateS);
+                        s = AddFoodApi.add("victor.ciresica@lenovo.com",numeS,cantitateS,umS,expirationDateS);
                         Log.v("am primit la add", s);
+
 
                         return null;
 
                     }
-
                     @Override
                     protected void onPostExecute(Void aVoid) {
                         super.onPostExecute(aVoid);
+//                        if (s.equals("ok")) {
+//                            final SweetAlertDialog alertDialog = new SweetAlertDialog(getContext(), SweetAlertDialog.SUCCESS_TYPE);
+//
+//                            alertDialog.setTitle("Food added successfully!");
+//                            alertDialog.setContentText("Someone in need will contact you soon");
+//                            alertDialog.setConfirmText("Ok");
+//                            alertDialog.show();
+//                            alertDialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+//                                @Override
+//                                public void onClick(SweetAlertDialog sDialog) {
+//                                    alertDialog.dismiss();
+//                                }
+//                            });
+//
+//                        } else {
+//                            final SweetAlertDialog alertDialog = new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE);
+//                            alertDialog.setTitle("Error!");
+//                            alertDialog.setContentText("Something went wrong :( ");
+//                            alertDialog.setConfirmText("Ok");
+//                            alertDialog.show();
+//                            alertDialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+//                                @Override
+//                                public void onClick(SweetAlertDialog sDialog) {
+//                                    alertDialog.dismiss();
+//                                }
+//                            });
+//                        }
                     }
                 };
 

@@ -19,7 +19,7 @@ import java.net.URL;
  */
 
 public class RegisterApi {
-
+    public static String apiURLGlobal = "http://10.81.130.112";
     public static String apiURL = "http://10.81.130.112/register.php";
 
     public static String register(String email, String name, String password, int type) {

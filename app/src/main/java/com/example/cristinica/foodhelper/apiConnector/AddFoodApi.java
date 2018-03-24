@@ -13,7 +13,8 @@ import java.net.URL;
  */
 
 public class AddFoodApi {
-        public static String apiURL = RegisterApi.apiURL +"/addProdus.php";
+
+        public static String apiURL = RegisterApi.apiURLGlobal +"/addProdus.php";
     public static String add(String email, String name, String cantitate, String um,String data_expirarii) {
         HttpURLConnection connection = null;
 
