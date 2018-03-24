@@ -7,5 +7,6 @@
     <color name="myGrey">#fafafa</color>
     <color name="myGreen">#9F81F7</color>
     <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
 
 </resources>

@@ -1,0 +1,72 @@
+<RelativeLayout android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="36dp"
+        android:textSize="20sp"
+        android:text="You can add food here" />
+
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/foodNameWrapper"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:layout_marginTop="80dp"
+
+        android:layout_marginLeft="30dp"
+        android:layout_marginStart="30dp">
+
+        <EditText
+            android:id="@+id/firstName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="112dp"
+            android:ems="10"
+            android:hint="Food name"
+            android:inputType="text"
+            android:textSize="20sp" />
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/cantitateWrapper"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:layout_marginTop="50dp"
+        android:layout_below="@+id/foodNameWrapper"
+        android:layout_marginLeft="30dp"
+        android:layout_marginStart="30dp">
+
+        <EditText
+            android:id="@+id/cantitate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="112dp"
+            android:ems="10"
+            android:hint="Cantitate"
+            android:inputType="text"
+            android:textSize="20sp" />
+    </android.support.design.widget.TextInputLayout>
+
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/cantitateWrapper"
+        android:layout_marginBottom="13dp"
+        android:layout_marginLeft="22dp"
+        android:layout_marginStart="22dp"
+        android:layout_toEndOf="@+id/cantitateWrapper"
+        android:layout_toRightOf="@+id/cantitateWrapper" />
+</RelativeLayout>
+
+
+
