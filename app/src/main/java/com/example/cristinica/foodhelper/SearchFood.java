@@ -15,8 +15,16 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.cristinica.foodhelper.CustomAdapter;
+import com.example.cristinica.foodhelper.apiConnector.GetFoodApi;
 import com.example.cristinica.foodhelper.models.Companys;
+import com.example.cristinica.foodhelper.models.Food;
+import com.google.gson.Gson;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
 
 
@@ -82,7 +90,7 @@ public class SearchFood extends Fragment {
         recyclerView = (RecyclerView) view.findViewById(R.id.my_recycler_view);
         swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshLayout);
 
-        Companys companys1 = new Companys();
+        /*Companys companys1 = new Companys();
         companys1.loginModel.adresa="test";
         companys1.loginModel.telefon="test";
         companys1.loginModel.nume="test";
@@ -95,27 +103,14 @@ public class SearchFood extends Fragment {
         companys2.loginModel.nume_reprezentant="test";
         ArrayList<Companys> arr = new ArrayList<>();
         arr.add(companys1);
-        arr.add(companys2);
+        arr.add(companys2);*/
 
-
-
-        recyclerView.setHasFixedSize(true);
-
-        layoutManager = new LinearLayoutManager(getContext());
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-
-
-        // removedItems = new ArrayList<Integer>();
-
-        adapter = new CustomAdapter(arr);
-        recyclerView.setAdapter(adapter);
 
 
 
         @SuppressLint("StaticFieldLeak") AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
 
-
+            ArrayList<Companys> arr = new ArrayList<>();
             @Override
             protected Void doInBackground(Void... params) {
                /* String s = ApiConnectionGetEvents.getEvents();
@@ -123,7 +118,30 @@ public class SearchFood extends Fragment {
                 Log.v("am primit la get Events", s);
                 Gson g = new Gson();
                 events = g.fromJson(s,  new TypeToken<ArrayList<Event>>(){}.getType());*/
-
+                try {
+                    String s = GetFoodApi.getAllFood();
+                    Gson g = new Gson();
+                    //System.out.println(s);
+                    //arr = g.fromJson(s,  new TypeToken<ArrayList<Companys>>(){}.getType());
+                    // System.out.println(arr.get(0).foods.get(0).nume);
+                    JSONArray jsonArray = new JSONArray(s);
+                    Companys companys = new Companys();
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        companys = g.fromJson(jsonObject.toString(), Companys.class);
+                        JSONArray jsonArray1 = jsonObject.getJSONArray("produse");
+                        for (int j = 0; j < jsonArray1.length(); j++){
+                            Food food = new Food();
+                            food = g.fromJson(jsonArray1.get(j).toString(), Food.class);
+                            companys.foods.add(food);
+                        }
+                        arr.add(companys);
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
                 return null;
             }
@@ -131,25 +149,23 @@ public class SearchFood extends Fragment {
             @Override
             protected void onPostExecute(Void aVoid) {
 
-                /*super.onPostExecute(aVoid);
-
-                Log.v("lista mea",events.get(0).toString());
+                super.onPostExecute(aVoid);
                 recyclerView.setHasFixedSize(true);
 
                 layoutManager = new LinearLayoutManager(getContext());
                 recyclerView.setLayoutManager(layoutManager);
-                recyclerView.setItemAnimator(new DefaultItemAnimator());*/
-
+                recyclerView.setItemAnimator(new DefaultItemAnimator());
 
                 // removedItems = new ArrayList<Integer>();
 
-                // adapter = new CustomAdapter(events);
-                // recyclerView.setAdapter(adapter);
+                adapter = new CustomAdapter(arr);
+                recyclerView.setAdapter(adapter);
+
 
             }
         };
 
-        // task.execute();
+        task.execute();
 
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {

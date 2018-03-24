@@ -11,6 +11,13 @@ import java.util.ArrayList;
  */
 
 public class Companys {
-    public LoginModel loginModel = new LoginModel();
+    public int id;
+    public String nume;
+    public String email;
+    public String parola;
+    public String nume_reprezentant;
+    public String telefon;
+    public String adresa;
+    public String status;
     public ArrayList<Food> foods = new ArrayList<>();
 }

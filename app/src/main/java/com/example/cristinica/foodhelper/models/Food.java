@@ -9,7 +9,7 @@ package com.example.cristinica.foodhelper.models;
 public class Food {
     public String nume;
     public int cantitate;
-    public String unitateMasura;
-    public String date;
+    public String um;
+    public String data_expirare;
 }
 

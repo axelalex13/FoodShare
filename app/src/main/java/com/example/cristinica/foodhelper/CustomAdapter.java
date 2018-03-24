@@ -53,7 +53,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
                 .inflate(R.layout.cards_layout, parent, false);
 
 
-
         MyViewHolder myViewHolder = new MyViewHolder(view);
         return myViewHolder;
     }
@@ -65,14 +64,13 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         TextView textViewDescriere = holder.textViewDescriere;
         TextView textViewDates = holder.textViewDates;
         TextView textViewLocatie = holder.textViewLocatie;
-
         ImageView coperta = holder.coperta;
 
-        textViewName.setText(dataSet.get(listPosition).loginModel.nume);
-        textViewDescriere.setText(dataSet.get(listPosition).loginModel.nume_reprezentant);
-        textViewDates.setText(dataSet.get(listPosition).loginModel.telefon);
-        textViewLocatie.setText(dataSet.get(listPosition).loginModel.adresa);
-        coperta.setImageResource(R.drawable.receive_food);
+        textViewName.setText(dataSet.get(listPosition).adresa);
+        textViewDescriere.setText(dataSet.get(listPosition).nume_reprezentant);
+        textViewDates.setText(dataSet.get(listPosition).nume);
+        textViewLocatie.setText(dataSet.get(listPosition).telefon);
+        coperta.setImageResource(R.drawable.background);
 
 
 
@@ -88,12 +86,11 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         } );*/
 
 
-
-
     }
 
     @Override
     public int getItemCount() {
         return dataSet.size();
     }
+
 }

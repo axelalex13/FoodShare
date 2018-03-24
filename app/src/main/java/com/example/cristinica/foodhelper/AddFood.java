@@ -19,6 +19,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -47,6 +50,7 @@ public class AddFood extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     View view;
     String s;
+    RadioGroup radioGroup;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -92,8 +96,9 @@ public class AddFood extends Fragment {
         view = inflater.inflate(R.layout.fragment_add_food, container, false);
         final TextView expirationDate = (TextView) view.findViewById(R.id.expirationDate);
         final Spinner dropdown2 = (Spinner) view.findViewById(R.id.spinner2);
-        final Button add =  view.findViewById(R.id.addFood);
 
+        final Button add =  view.findViewById(R.id.addFood);
+        final TextView textViewFood = view.findViewById(R.id.textView6);
         final EditText cantitate =  view.findViewById(R.id.cantitate);
         final Calendar myCalendar = Calendar.getInstance();
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
@@ -129,12 +134,14 @@ public class AddFood extends Fragment {
                         myCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
+
+
         String[] unit = {"Kg","Liters","Porsions"};
         final ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
                 R.layout.spinner_item, unit);
         dropdown2.setAdapter(adapter);
 
-       final  ArrayList<ItemData> list=new ArrayList<>();
+        final  ArrayList<ItemData> list=new ArrayList<>();
 
         list.add(new ItemData("Main Course",R.drawable.maincourse));
         list.add(new ItemData("Soup",R.drawable.soup));
@@ -142,7 +149,7 @@ public class AddFood extends Fragment {
         list.add(new ItemData("Desert",R.drawable.cupcake));
         list.add(new ItemData("Juice",R.drawable.juice));
         final Spinner sp=(Spinner) view.findViewById(R.id.spinner);
-        SpinnerAdapter adapter2=new SpinnerAdapter(getActivity(), R.layout.spinner_layout,R.id.txt,list);
+        final SpinnerAdapter adapter2=new SpinnerAdapter(getActivity(), R.layout.spinner_layout,R.id.txt,list);
         sp.setAdapter(adapter2);
 
         final ArrayList<ItemData> list2=new ArrayList<>();
@@ -157,6 +164,43 @@ public class AddFood extends Fragment {
         ids.put(list2.get(0).getImageId(),"kg");
         ids.put(list2.get(1).getImageId(),"liters");
         ids.put(list2.get(2).getImageId(),"plates");
+
+
+
+        final  ArrayList<ItemData> list3=new ArrayList<>();
+
+        list3.add(new ItemData("Sugar",R.drawable.sugar));
+        list3.add(new ItemData("Oil",R.drawable.oil));
+        list3.add(new ItemData("Flour",R.drawable.flour));
+        list3.add(new ItemData("Rice",R.drawable.rice));
+        final SpinnerAdapter adapter4=new SpinnerAdapter(getActivity(), R.layout.spinner_layout,R.id.txt,list3);
+
+
+
+
+
+
+        radioGroup=(RadioGroup)view.findViewById(R.id.radioGroup);
+        final RadioButton rb1 = (RadioButton)  view.findViewById(R.id.radio_food);
+        final RadioButton rb2 = (RadioButton)  view.findViewById(R.id.radio_ingredients);
+
+        View.OnClickListener button1Listener = new View.OnClickListener() {
+            public void onClick(View v) {
+            sp.setAdapter(adapter2);
+            textViewFood.setText("Food type");
+
+
+            }
+        };
+
+        View.OnClickListener button2Listener = new View.OnClickListener() {
+            public void onClick(View v) {
+                sp.setAdapter(adapter4);
+                textViewFood.setText("Select ingredient");
+            }
+        };
+        rb1.setOnClickListener(button1Listener);
+        rb2.setOnClickListener(button2Listener);
 
 
 

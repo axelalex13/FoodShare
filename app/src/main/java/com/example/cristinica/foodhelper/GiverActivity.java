@@ -72,7 +72,7 @@ public class GiverActivity extends AppCompatActivity  implements FoodFragment.On
         int id = item.getItemId();
         if (id == R.id.menu_lang) {
 
-            Intent i = new Intent(GiverActivity.this, Login.class);
+            Intent i = new Intent(GiverActivity.this, SettingsActivity.class);
             startActivity(i);
 
         }

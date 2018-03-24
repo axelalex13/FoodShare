@@ -7,7 +7,7 @@
     android:textAlignment="center"
     tools:context="com.example.cristinica.foodhelper.SettingsActivity">
 
-    <EditText
+    <TextView
         android:id="@+id/editText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -16,8 +16,8 @@
         android:layout_centerInParent="true"
         android:layout_centerVertical="true"
         android:layout_marginTop="14dp"
+        android:textSize="20sp"
         android:ems="10"
-        android:inputType="textPersonName"
         android:text="Tell more about you"
         android:textAlignment="center" />
 
@@ -54,7 +54,7 @@
             android:layout_toRightOf="@+id/imageView"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="Nume" />
+            android:hint="Nume" />
     </RelativeLayout>
 
 
@@ -91,7 +91,7 @@
             android:layout_toRightOf="@+id/imageView2"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="Email" />
+            android:hint="Email" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -127,7 +127,7 @@
             android:layout_toRightOf="@+id/imageView4"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="Adresa" />
+            android:hint="Adresa" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -163,7 +163,7 @@
             android:layout_toRightOf="@+id/imageView3"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="Numar de telefon" />
+            android:hint="Numar de telefon" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -199,7 +199,7 @@
             android:layout_toRightOf="@+id/imageView6"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="Nume Reprezentant" />
+            android:hint="Nume Reprezentant" />
     </RelativeLayout>
 
     <Button

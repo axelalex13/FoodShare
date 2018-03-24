@@ -5,39 +5,85 @@
 
 
     <TextView
-        android:textColor="#81878b"
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
+        android:layout_marginEnd="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="20dp"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:text="You can help other with your food" />
+        android:text="You can help other with cooked food or ingredients"
+        android:textAlignment="center"
 
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="200dp"
+        android:textColor="#81878b"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/radioGroup"
+        android:layout_marginTop="70dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/radio_food"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:onClick="onRadioButtonClicked"
+            android:text="Cooked food" />
+
+        <RadioButton
+            android:id="@+id/radio_ingredients"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:onClick="onRadioButtonClicked"
+            android:text="Ingredients" />
+    </RadioGroup>
+
+    <RelativeLayout
+        android:id="@+id/layoutFood"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/textView"
-        android:layout_marginLeft="40dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="54dp"
-        />
+        android:layout_below="@+id/radioGroup">
 
-    <TextView
-        android:textColor="#81878b"
-        android:id="@+id/textView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/spinner"
-        android:layout_alignStart="@+id/spinner"
-        android:layout_below="@+id/textView"
-        android:layout_marginTop="16dp"
-        android:text="Food type" />
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/textView6"
+            android:layout_alignStart="@+id/textView6"
+            android:layout_below="@+id/textView6"
+            android:layout_marginTop="11dp" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="40dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="17dp"
+            android:text="Food type"
+            android:textColor="#81878b" />
+
+
+
+
+
+
+    </RelativeLayout>
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/cantitateWrapper"
@@ -45,8 +91,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:textColor="@color/colorPrimary"
-        android:layout_marginTop="30dp"
-        android:layout_below="@+id/spinner"
+        android:layout_marginTop="210dp"
         android:layout_marginLeft="40dp"
         android:layout_marginStart="40dp">
 
@@ -102,7 +147,7 @@
         android:layout_alignLeft="@+id/startingDateWrapper"
         android:layout_alignStart="@+id/startingDateWrapper"
         android:layout_below="@+id/cantitateWrapper"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:textSize="18sp"
         android:text="Please provide an expiration date" />
 
