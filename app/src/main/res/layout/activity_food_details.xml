@@ -101,7 +101,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="30dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="12dp"
                 android:text="GO TO"
                 android:textColor="@color/button_text_color" />
 
@@ -115,7 +115,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_marginLeft="29dp"
                 android:layout_marginStart="29dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="12dp"
                 android:text="Call"
                 android:textColor="@color/button_text_color" />
         </RelativeLayout>
@@ -137,6 +137,3 @@
     </RelativeLayout>
 
 </RelativeLayout>
-
-
-

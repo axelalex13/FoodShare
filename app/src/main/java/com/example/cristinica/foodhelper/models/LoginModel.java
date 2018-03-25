@@ -17,4 +17,5 @@ public class LoginModel {
     public String telefon;
     public String adresa;
     public String status;
+    public int range;
 }

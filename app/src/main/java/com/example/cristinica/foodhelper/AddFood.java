@@ -239,42 +239,35 @@ public class AddFood extends Fragment {
                     protected void onPostExecute(Void aVoid) {
                         super.onPostExecute(aVoid);
                         if (s.equals("ok\n")) {
-
-
-                            AlertDialog alertDialog = new AlertDialog.Builder(getContext()).create();
-                            alertDialog.setTitle("Alert");
-                            alertDialog.setMessage("Add was added!");
-                            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                                    new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            dialog.dismiss();
-                                        }
-                                    });
+                            final SweetAlertDialog alertDialog = new SweetAlertDialog(getContext(), SweetAlertDialog.SUCCESS_TYPE);
+                            alertDialog.setTitle("Congratulations!");
+                            alertDialog.setContentText("Food was added!");
+                            alertDialog.setConfirmText("Ok");
                             alertDialog.show();
+                            alertDialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    alertDialog.dismiss();
+                                    cantitate.setText("");
+                                    expirationDate.setText("");
+                                }
+                            });
+
 
 
                         } else {
-                            AlertDialog alertDialog = new AlertDialog.Builder(getContext()).create();
-                            alertDialog.setTitle("Alert");
-                            alertDialog.setMessage("error adding food!");
-                            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                                    new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            dialog.dismiss();
-                                        }
-                                    });
+
+                            final SweetAlertDialog alertDialog = new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE);
+                            alertDialog.setTitle("Error!");
+                            alertDialog.setContentText("Something went wrong :( ");
+                            alertDialog.setConfirmText("Ok");
                             alertDialog.show();
-//                            final SweetAlertDialog alertDialog = new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE);
-//                            alertDialog.setTitle("Error!");
-//                            alertDialog.setContentText("Something went wrong :( ");
-//                            alertDialog.setConfirmText("Ok");
-//                            alertDialog.show();
-//                            alertDialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-//                                @Override
-//                                public void onClick(SweetAlertDialog sDialog) {
-//                                    alertDialog.dismiss();
-//                                }
-//                            });
+                            alertDialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    alertDialog.dismiss();
+                                }
+                            });
                         }
                     }
                 };

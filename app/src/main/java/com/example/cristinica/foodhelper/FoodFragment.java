@@ -88,10 +88,7 @@ public class FoodFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_food, container, false);
         listView = view.findViewById(R.id.list);
-        final SharedPreferences sharedPreferences = getContext().getSharedPreferences("user", Context.MODE_PRIVATE);
-        final LoginModel loginModel;
-        Gson g = new Gson();
-        loginModel = g.fromJson(sharedPreferences.getString("user", ""), LoginModel.class);
+
 
         @SuppressLint("StaticFieldLeak") AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
 
@@ -99,6 +96,9 @@ public class FoodFragment extends Fragment {
             @Override
 
             protected Void doInBackground(Void... params) {
+                SharedPreferences sharedPreferences = getContext().getSharedPreferences("user", Context.MODE_PRIVATE);
+                String uer = sharedPreferences.getString("user", "");
+                LoginModel loginModel = new Gson().fromJson(uer, LoginModel.class);
                 String s = MyFoodApi.getFood(loginModel.email);
 
                 Log.v("am primit la get food", s);

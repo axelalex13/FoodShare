@@ -20,9 +20,9 @@ import java.net.URL;
 
 public class SaveInfoApi {
 
-    public static String apiURL = "http://10.81.130.112/register.php";
+    public static String apiURL = "http://10.81.130.112/addCompanyInfo.php";
 
-    public static String saveInfo(String email, String newMail, String name, String reprezentant, String phone, String address) {
+    public static String saveInfo(String email, String newMail, String name, String reprezentant, String phone, String address, int range) {
         HttpURLConnection connection = null;
 
         try {
@@ -34,6 +34,7 @@ public class SaveInfoApi {
             postDataParams.put("telefon", phone);
             postDataParams.put("adresa", address);
             postDataParams.put("nume_reprezentant", reprezentant);
+            postDataParams.put("range", range);
 
 
             connection = (HttpURLConnection) url.openConnection();

@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.example.cristinica.foodhelper.apiConnector.SaveInfoApi;
@@ -18,6 +19,7 @@ import com.example.cristinica.foodhelper.models.RegisterModel;
 import com.google.gson.Gson;
 
 public class SettingsActivity extends AppCompatActivity {
+    public static int range;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,9 +35,10 @@ public class SettingsActivity extends AppCompatActivity {
         final TextView phone = findViewById(R.id.editText4);
         final TextView reprezentant = findViewById(R.id.editText6);
         final LoginModel loginModel;
+
         Gson g = new Gson();
         loginModel = g.fromJson(sharedPreferences.getString("user", ""), LoginModel.class);
-
+        range = loginModel.range;
         if (loginModel.nume != null)
             name.setText(loginModel.nume);
         if (loginModel.email != null)
@@ -76,6 +79,9 @@ public class SettingsActivity extends AppCompatActivity {
         Button save = findViewById(R.id.save);
         if (type == 0) {
             save.setBackgroundDrawable(getResources().getDrawable(R.drawable.round));
+            findViewById(R.id.seekBar).setAlpha(0);
+            findViewById(R.id.textView13).setAlpha(0);
+            findViewById(R.id.imageView9).setAlpha(0);
         } else if (type == 1) {
             save.setBackgroundDrawable(getResources().getDrawable(R.drawable.round2));
         }
@@ -88,10 +94,11 @@ public class SettingsActivity extends AppCompatActivity {
                     @Override
                     protected Void doInBackground(Void... params) {
                         String s = SaveInfoApi.saveInfo(loginModel.email, email.getText().toString(), name.getText().toString(),
-                                reprezentant.getText().toString(), phone.getText().toString(), address.getText().toString());
+                                reprezentant.getText().toString(), phone.getText().toString(), address.getText().toString(), range);
                         Log.v("am primit", s);
                         Gson g = new Gson();
-                        registerModel = g.fromJson(s, RegisterModel.class);
+                        System.out.println(s);
+                        //registerModel = g.fromJson(s, RegisterModel.class);
                         return null;
                     }
 
@@ -105,6 +112,30 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
+        if (type == 1){
+            SeekBar seekBar = findViewById(R.id.seekBar);
+            seekBar.setProgress(loginModel.range);
+            TextView textView = findViewById(R.id.textView13);
+            textView.setText(String.valueOf(range));
+            seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                @Override
+                public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                    range = i;
+                    TextView textView = findViewById(R.id.textView13);
+                    textView.setText(String.valueOf(i));
+                }
+
+                @Override
+                public void onStartTrackingTouch(SeekBar seekBar) {
+                }
+
+                @Override
+                public void onStopTrackingTouch(SeekBar seekBar) {
+
+                }
+            });
+        }
+
 
     }
-    }
+}

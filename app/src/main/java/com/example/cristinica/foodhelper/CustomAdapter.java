@@ -70,19 +70,33 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         textViewDescriere.setText(dataSet.get(listPosition).nume_reprezentant);
         textViewDates.setText(dataSet.get(listPosition).nume);
         textViewLocatie.setText(dataSet.get(listPosition).telefon);
-        coperta.setImageResource(R.drawable.background);
+        switch (listPosition % 5) {
+            case 0:
+                coperta.setImageResource(R.drawable.img1);
+                break;
+            case 1:
+                coperta.setImageResource(R.drawable.img2);
+                break;
+            case 2:
+                coperta.setImageResource(R.drawable.img3);
+                break;
+            case 3:
+                coperta.setImageResource(R.drawable.img4);
+                break;
+            case 4:
+                coperta.setImageResource(R.drawable.img5);
+                break;
 
+        }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Intent intent=new Intent(v.getContext(), FoodDetails.class);
-                intent.putExtra("position",listPosition);
+                Intent intent = new Intent(v.getContext(), FoodDetails.class);
+                intent.putExtra("position", listPosition);
                 v.getContext().startActivity(intent);
-
             }
-        } );
+        });
 
 
     }
@@ -93,4 +107,3 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     }
 
 }
- 
