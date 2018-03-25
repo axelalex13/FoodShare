@@ -57,6 +57,7 @@ public class MyListAdapterAsk extends BaseAdapter {
 
         TextView name = (TextView) listView.findViewById(R.id.companyName);
         Button button = (Button) listView.findViewById(R.id.callAsk);
+        Button button1 = listView.findViewById(R.id.gotoAsk);
 
         name.setText(orderName.get(position).nume);
         button.setOnClickListener(new View.OnClickListener() {
@@ -65,6 +66,19 @@ public class MyListAdapterAsk extends BaseAdapter {
                 String phone = orderName.get(position).telefon;
                 Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phone, null));
                 context.startActivity(intent);
+            }
+        });
+
+
+        button1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //  Uri gmmIntentUri = Uri.parse("geo:0,0?q=1600 Amphitheatre Parkway, Mountain+View, California");
+                String[] arr = orderName.get(position).adresa.split(" ");
+                Uri gmmIntentUri = Uri.parse("geo:0,0?q=" + orderName.get(position).adresa);
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                mapIntent.setPackage("com.google.android.apps.maps");
+                context.startActivity(mapIntent);
             }
         });
 

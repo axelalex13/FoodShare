@@ -18,4 +18,5 @@ public class LoginModel {
     public String adresa;
     public String status;
     public int range;
+
 }

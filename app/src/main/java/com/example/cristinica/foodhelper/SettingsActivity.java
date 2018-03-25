@@ -18,8 +18,10 @@ import com.example.cristinica.foodhelper.models.LoginModel;
 import com.example.cristinica.foodhelper.models.RegisterModel;
 import com.google.gson.Gson;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
 public class SettingsActivity extends AppCompatActivity {
-    public static int range;
+    public static int range = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +40,8 @@ public class SettingsActivity extends AppCompatActivity {
 
         Gson g = new Gson();
         loginModel = g.fromJson(sharedPreferences.getString("user", ""), LoginModel.class);
-        range = loginModel.range;
+        if (range == -1)
+            range = loginModel.range;
         if (loginModel.nume != null)
             name.setText(loginModel.nume);
         if (loginModel.email != null)
@@ -103,16 +106,27 @@ public class SettingsActivity extends AppCompatActivity {
                     }
 
                     protected void onPostExecute(Void param) {
+                        final SweetAlertDialog alertDialog = new SweetAlertDialog(SettingsActivity.this, SweetAlertDialog.SUCCESS_TYPE);
+                        alertDialog.setTitle("Your data has been changed!");
 
+                        alertDialog.setConfirmText("Ok");
+                        alertDialog.show();
+                        alertDialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                            @Override
+                            public void onClick(SweetAlertDialog sDialog) {
+                                alertDialog.dismiss();
+                                finish();
+                            }
+                        });
                     }
 
                 };
                 task.execute();
-                finish();
+
             }
         });
 
-        if (type == 1){
+        if (type == 1) {
             SeekBar seekBar = findViewById(R.id.seekBar);
             seekBar.setProgress(loginModel.range);
             TextView textView = findViewById(R.id.textView13);

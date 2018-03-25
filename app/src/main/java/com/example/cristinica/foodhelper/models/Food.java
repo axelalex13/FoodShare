@@ -11,5 +11,6 @@ public class Food {
     public int cantitate;
     public String um;
     public String data_expirare;
+    public int id;
 }
 
