@@ -31,6 +31,7 @@ import java.util.ArrayList;
 
 
 public class SearchFood extends Fragment {
+    public static ArrayList<Companys> arr = new ArrayList<>();
 
     private RecyclerView.LayoutManager layoutManager;
     SwipeRefreshLayout swipeRefreshLayout;
@@ -90,27 +91,9 @@ public class SearchFood extends Fragment {
         recyclerView = (RecyclerView) view.findViewById(R.id.my_recycler_view);
         swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshLayout);
 
-        /*Companys companys1 = new Companys();
-        companys1.loginModel.adresa="test";
-        companys1.loginModel.telefon="test";
-        companys1.loginModel.nume="test";
-        companys1.loginModel.nume_reprezentant="test";
-
-        Companys companys2 = new Companys();
-        companys2.loginModel.adresa="test";
-        companys2.loginModel.telefon="test";
-        companys2.loginModel.nume="test";
-        companys2.loginModel.nume_reprezentant="test";
-        ArrayList<Companys> arr = new ArrayList<>();
-        arr.add(companys1);
-        arr.add(companys2);*/
-
-
-
 
         @SuppressLint("StaticFieldLeak") AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
 
-            ArrayList<Companys> arr = new ArrayList<>();
             @Override
             protected Void doInBackground(Void... params) {
                /* String s = ApiConnectionGetEvents.getEvents();
@@ -121,9 +104,6 @@ public class SearchFood extends Fragment {
                 try {
                     String s = GetFoodApi.getAllFood();
                     Gson g = new Gson();
-                    //System.out.println(s);
-                    //arr = g.fromJson(s,  new TypeToken<ArrayList<Companys>>(){}.getType());
-                    // System.out.println(arr.get(0).foods.get(0).nume);
                     JSONArray jsonArray = new JSONArray(s);
                     Companys companys = new Companys();
                     for (int i = 0; i < jsonArray.length(); i++) {

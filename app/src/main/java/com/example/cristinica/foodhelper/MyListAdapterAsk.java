@@ -1,10 +1,13 @@
 package com.example.cristinica.foodhelper;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.cristinica.foodhelper.R;
@@ -53,10 +56,17 @@ public class MyListAdapterAsk extends BaseAdapter {
         listView = inflater.inflate(R.layout.list_layout_ask, null);
 
         TextView name = (TextView) listView.findViewById(R.id.companyName);
-
+        Button button = (Button) listView.findViewById(R.id.callAsk);
 
         name.setText(orderName.get(position).nume);
-
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String phone = orderName.get(position).telefon;
+                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phone, null));
+                context.startActivity(intent);
+            }
+        });
 
         return listView;
     }

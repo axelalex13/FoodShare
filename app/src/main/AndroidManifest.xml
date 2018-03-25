@@ -25,7 +25,8 @@
         <activity android:name=".Login" />
         <activity android:name=".GiverActivity" />
         <activity android:name=".SettingsActivity" />
-        <activity android:name=".ReceiverActivity"></activity>
+        <activity android:name=".ReceiverActivity" />
+        <activity android:name=".FoodDetails"></activity>
     </application>
 
 </manifest>

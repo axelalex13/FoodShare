@@ -2,6 +2,7 @@ package com.example.cristinica.foodhelper;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import android.widget.ListView;
 
 import com.example.cristinica.foodhelper.apiConnector.MyFoodApi;
 import com.example.cristinica.foodhelper.models.Food;
+import com.example.cristinica.foodhelper.models.LoginModel;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -86,7 +88,10 @@ public class FoodFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_food, container, false);
         listView = view.findViewById(R.id.list);
-
+        final SharedPreferences sharedPreferences = getContext().getSharedPreferences("user", Context.MODE_PRIVATE);
+        final LoginModel loginModel;
+        Gson g = new Gson();
+        loginModel = g.fromJson(sharedPreferences.getString("user", ""), LoginModel.class);
 
         @SuppressLint("StaticFieldLeak") AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
 
@@ -94,7 +99,7 @@ public class FoodFragment extends Fragment {
             @Override
 
             protected Void doInBackground(Void... params) {
-                String s = MyFoodApi.getFood("carrefour@carrefour.com");
+                String s = MyFoodApi.getFood(loginModel.email);
 
                 Log.v("am primit la get food", s);
                 Gson g = new Gson();

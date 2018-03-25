@@ -73,17 +73,16 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         coperta.setImageResource(R.drawable.background);
 
 
-
-        /*holder.itemView.setOnClickListener(new View.OnClickListener() {
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent intent=new Intent(v.getContext(), Details.class);
+                Intent intent=new Intent(v.getContext(), FoodDetails.class);
                 intent.putExtra("position",listPosition);
                 v.getContext().startActivity(intent);
 
             }
-        } );*/
+        } );
 
 
     }
@@ -94,3 +93,4 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     }
 
 }
+ 
